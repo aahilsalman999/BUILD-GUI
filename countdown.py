@@ -9,13 +9,11 @@ minuites = StringVar()
 seconds = StringVar()
 
 def start_countdown():
-    h = int(hours.get())
-    m = int(minuites.get())
-    s = int(seconds.get())
-    total_seconds = (h * 3600) + (m * 60) + s
-    while total_seconds > 0:
-        time.sleep(1)
-        s = s - 1
+    hr = int(hours.get())
+    mi = int(minuites.get())
+    se = int(seconds.get())
+    total_seconds = (hr * 3600) + (mi * 60) + se
+    while total_seconds >= 0:
         m,s = divmod(total_seconds , 60)
         h,m = divmod(m , 60)
         hours.set(h)
@@ -23,6 +21,9 @@ def start_countdown():
         seconds.set(s)
         if total_seconds == 0:
             messagebox.showinfo("Time Countdown", "Time's up")
+        window.update()
+        time.sleep(1)
+        total_seconds -= 1
    
 hours_entry = Entry(window, textvariable = hours, width = 3, font = ('Callibri', 30))
 hours_entry.grid(row = 0, column = 0, padx = 10, pady = 20)
